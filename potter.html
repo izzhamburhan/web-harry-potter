@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 700px;
+            background-color: #222222;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "white"}, "id": "Fred", "label": "Fred", "shape": "dot", "size": 4}, {"font": {"color": "white"}, "id": "Hogwarts", "label": "Hogwarts", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Arthur", "label": "Arthur", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Katie", "label": "Katie", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Draco", "label": "Draco", "shape": "dot", "size": 3}, {"font": {"color": "white"}, "id": "McGonagall", "label": "McGonagall", "shape": "dot", "size": 5}, {"font": {"color": "white"}, "id": "Angelina", "label": "Angelina", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Nick", "label": "Nick", "shape": "dot", "size": 2}, {"font": {"color": "white"}, "id": "Patrick", "label": "Patrick", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Albus", "label": "Albus", "shape": "dot", "size": 1}, {"font": {"color": "white"}, "id": "Aragog", "label": "Aragog", "shape": "dot", "size": 1}]);
+        edges = new vis.DataSet([{"from": "Fred", "label": 1, "to": "Hogwarts", "values": 1, "weight": 1}, {"from": "Fred", "label": 1, "to": "Arthur", "values": 2, "weight": 1}, {"from": "Fred", "label": 1, "to": "Katie", "values": 5, "weight": 1}, {"from": "Fred", "label": 1, "to": "Draco", "values": 5, "weight": 1}, {"from": "Hogwarts", "label": 1, "to": "McGonagall", "values": 2, "weight": 1}, {"from": "Arthur", "label": 1, "to": "Draco", "values": 1, "weight": 1}, {"from": "Draco", "label": 1, "to": "McGonagall", "values": 1, "weight": 1}, {"from": "Katie", "label": 1, "to": "Angelina", "values": 6, "weight": 1}, {"from": "Nick", "label": 1, "to": "Patrick", "values": 18, "weight": 1}, {"from": "Nick", "label": 1, "to": "McGonagall", "values": 10, "weight": 1}, {"from": "Albus", "label": 1, "to": "McGonagall", "values": 13, "weight": 1}, {"from": "McGonagall", "label": 1, "to": "Aragog", "values": 6, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
